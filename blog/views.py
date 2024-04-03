@@ -1,13 +1,22 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render
 from .models import Post
+from django.views.generic import ListView
 
-def index(request):
-    posts = Post.objects.all()
+class PostList(ListView):
+    model = Post
 
-    return render(
-        request,
-        'blog/index.html',
-        {
-            'posts': posts,
-        }
-    )
+    def get_queryset(self):
+        return Post.objects.order_by('-created')
+
+# def index(request):
+#     posts = Post.objects.all()
+
+#     return render(
+#         request,
+#         'blog/index.html',
+#         {
+#             'posts': posts,
+#         }
+#     )
