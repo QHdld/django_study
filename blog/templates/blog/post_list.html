@@ -1,8 +1,19 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>Blog</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'blog/bootstrap/bootstrap.css' %}">
+    {% comment %} <link rel="stylesheet" href="../5/morph/bootstrap.css"> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'blog/_assets/_assets.css' %}">
+    {% comment %} <link rel="stylesheet" href="../_assets/css/custom.min.css"> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'blog/icon/icon.css' %}">
+    {% comment %} <link rel="stylesheet" href="../_vendor/bootstrap-icons/font/bootstrap-icons.min.css"> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'blog/theme/theme.css' %}">
+    {% comment %} <link rel="stylesheet" href="../_vendor/prismjs/themes/prism-okaidia.css"> {% endcomment %}
 </head>
 
 <body>
@@ -11,7 +22,14 @@
     {% for p in object_list %}
         <h3>{{ p }}</h3>
         <h4>{{ p.created }} by {{ p.author }}</h4>
-        <p>{{ p.content}}</p>
+        <p>{{ p.content }}</p>
     {% endfor %}
+
+    <script src="{% static 'blog/dist/dist.js' %}"></script>
+    {% comment %} <script src="../_vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script> {% endcomment %}
+    <script src="{% static 'blog/prismjs/prism.js' %}"></script>
+    {% comment %} <script src="../_vendor/prismjs/prism.js" data-manual=""></script> {% endcomment %}
+    <script src="{% static 'blog/_assets/_assets.js' %}"></script>
+    {% comment %} <script src="../_assets/js/custom.js"></script> {% endcomment %}
 </body>
 </html>
