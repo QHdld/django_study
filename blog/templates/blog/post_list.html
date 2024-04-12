@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
+    <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light" id='navbar'>
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Navbar</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,23 +59,31 @@
     </nav>
 
     <div class="container">
-      <h1>Blog</h1>
+      <div class="col-lg-8">
+        <h1>Blog</h1>
 
-      <div class="row">
+        <div class="row">
         <!-- Blog entries-->
-        <div class="col-lg-8">
-            <!-- Featured blog post-->
-          {% for p in object_list %}
-            <div class="card mb-4">
-                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                <div class="card-body">
-                    <div class="small text-muted">{{ p.created }}</div>
-                    <h2 class="card-title">{{ p.title }}</h2>
-                    <p class="card-text">{{ p.content }}</p>
-                    <a class="btn btn-primary" href="#!">Read more →</a>
-                </div>
-            </div>
-          {% endfor %}
+          <!-- Featured blog post-->
+          {% if object_list.exists %}
+            {% for p in object_list %}
+              <div class="card mb-4">
+                  {% if p.head_image %}
+                  <a href="#!"><img class="card-img-top" src="{{ p.head_image.url }}" alt="Card image cap"/></a>
+                  {% else %}
+                  <img class="card-img-top" src="https://picsum.photos/id/1/750/300/?random" alt="..." />
+                  {% endif %}
+                  <div class="card-body">
+                      <div class="small text-muted">{{ p.created }}</div>
+                      <h2 class="card-title">{{ p.title }}</h2>
+                      <p class="card-text">{{ p.content | truncatewords:50 }}</p>
+                      <a class="btn btn-primary" href="#!">Read more →</a>
+                  </div>
+              </div>
+            {% endfor %}
+          {% else %}
+            <h3>아직 게시물이 없습니다.</h3>
+          {% endif %}
             <!-- Pagination-->
         </div>
         <!-- Side widgets-->
